@@ -1,0 +1,73 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Posts
+                </li>
+            </ol>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Posts</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table ng-table="tableParams"  show-filter="true" template-pagination="pager" class="table table-bordered table-hover table-striped">
+                            <tr ng-repeat="post in $data">
+                                <td data-title="'Content'" filter="{ 'content': 'text' }">
+                                    {{post.content}}
+                                </td>
+                                <td data-title="'Like'">
+                                    {{post.nLike}}
+                                </td>
+                                <td data-title="'Comment'">
+                                    {{post.nComment}}
+                                </td>
+                                <td data-title="'Owner Name'"  filter="{ 'owner': 'text' }">
+                                    {{post.owner}}
+                                </td>
+<!--                                <td data-title="'Actor Name'">
+                                    {{post.actor}}
+                                </td>-->
+                                <td data-title="'Active'"  filter="{ 'active': 'active'}">
+                                    <a href="javascript:void(0)" class="post_{{post.id}}" ng-click="active(post.recordID)">{{post.active}}</a>
+                                </td>
+                            </tr>
+                        </table>
+                             <script type="text/ng-template" id="ng-table/filters/active.html">
+                            <select ng-model="params.filter()[name]" name="filter-active" class="form-control">
+                            <option value="">All</option>
+                            <option value="Disable">Disable</option>
+                            <option value="Enable">Enable</option>
+                            </select>
+                        </script>
+                        <script type="text/ng-template" id="pager">
+                            <ul class="pager ng-cloak">
+                            <li ng-repeat="page in pages"
+                            ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}"
+                            ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">
+                            <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo; Previous</a>
+                            <a ng-switch-when="next" ng-click="params.page(page.number)" href="">Next &raquo;</a>
+                            </li>
+                            </ul>
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container-fluid -->
